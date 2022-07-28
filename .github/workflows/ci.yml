@@ -1,0 +1,29 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ "development", "main" ]
+  pull_request:
+    branches: [ "development", "main" ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        check-latest: true
+    - name: Install dependencies
+      run: npm ci
+    - name: Codegen
+      run: npm run codegen:mainnet
+    - name: Build
+      run: npm run build:mainnet

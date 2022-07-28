@@ -1,0 +1,33 @@
+type DXReputation @entity {
+  id: ID!
+  address: Bytes!
+}
+
+type BlockReputation @entity {
+  id: ID!
+  blockNumber: BigInt!
+  reputation: BigDecimal!
+}
+
+type AddresReputation @entity {
+  id: ID!
+  address: Bytes!
+  "Current reputation of the address"
+  reputation: BigDecimal!
+  "Reputation mints"
+  mints: [AddresReputationMint!]! @derivedFrom(field: "address")
+  "Reputation burns"
+  burns: [AddresReputationBurn!]! @derivedFrom(field: "address")
+}
+
+type AddresReputationMint @entity {
+  id: ID!
+  address: AddresReputation!
+  reputation: BigDecimal!
+}
+
+type AddresReputationBurn @entity {
+  id: ID!
+  address: AddresReputation!
+  reputation: BigDecimal!
+}

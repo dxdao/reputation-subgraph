@@ -1,0 +1,34 @@
+{
+  "name": "@dxdao/reputation-subgraph",
+  "version": "1.0.0",
+  "repository": "https://github.com/dxdao/reputation-subgraph",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts src",
+    "lint:fix": "npm run lint -- --fix",
+    "graph:auth": "npx graph auth https://api.thegraph.com/deploy/ -- ",
+    "codegen:mainnet": "graph codegen subgraph.mainnet.yaml --output-dir src/types/",
+    "codegen:gnosis": "graph codegen subgraph.gnosis.yaml --output-dir src/types/",
+    "codegen:arbitrum-one": "graph codegen subgraph.arbitrum-one-old.yaml --output-dir src/types/",
+    "build:mainnet": "graph build subgraph.mainnet.yaml",
+    "build:gnosis": "graph build subgraph.gnosis.yaml",
+    "build:arbitrum-one": "graph build subgraph.arbitrum-one-old.yaml",
+    "create-local": "graph create dxdao/reputation --node http://127.0.0.1:8020",
+    "deploy-local:mainnet": "graph deploy dxdao/reputation subgraph.rinkeby.yaml --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy-local:gnosis": "graph deploy dxdao/reputation-subgraph-gnosis subgraph.gnosis.yaml --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy-local:arbitrum-one": "graph deploy dxdao/reputation-arbitrum-one subgraph.arbitrum-one-old.yaml --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy:gnosis": "graph deploy dxdao/reputation-gnosis subgraph.gnosis.yaml --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
+    "deploy:mainnet": "graph deploy dxdao/reputation subgraph.mainnet.yaml --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
+    "deploy:arbitrum-one": "graph deploy dxdao/reputation-arbitrum-one subgraph.arbitrum-one.yaml --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.32.0",
+    "@graphprotocol/graph-ts": "^0.27.0",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.2",
+    "eslint-config-prettier": "^6.1.0",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.2"
+  }
+}

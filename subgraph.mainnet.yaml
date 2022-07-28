@@ -1,0 +1,31 @@
+specVersion: 0.0.4
+description: DXdao's Reputation Subgraph
+repository: https://github.com/dxdao/reputation-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DXReputation
+    network: mainnet
+    source:
+      address: '0x7a927a93f221976aae26d5d077477307170f0b7c'
+      abi: DXReputation
+      startBlock: 7850172
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/reputation.ts
+      entities:
+        - Reputation
+        - BlockReputation
+      abis:
+        - name: DXReputation
+          file: ./abis/DXReputation.json
+      blockHandlers:
+        - handler: handleBlockReputation
+      eventHandlers:
+        - handler: handleMint
+          event: Mint(indexed address,uint256)
+        - handler: handleBurn
+          event: Burn(indexed address,uint256)
