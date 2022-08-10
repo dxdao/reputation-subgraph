@@ -1,6 +1,8 @@
 specVersion: 0.0.4
 description: DXdao's Reputation Subgraph
 repository: https://github.com/dxdao/reputation-subgraph
+features:
+    - nonFatalErrors
 schema:
   file: ./schema.graphql
 dataSources:
